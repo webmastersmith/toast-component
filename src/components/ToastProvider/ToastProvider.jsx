@@ -9,7 +9,8 @@ export default function ToastProvider() {
   function removeToast(id) {
     setToasts((t) => t.filter((toast) => toast?.props?.id !== id));
   }
-  useEscapeKey(() => setToasts([]));
+  const clearToast = React.useCallback(() => setToasts([]));
+  useEscapeKey(clearToast);
 
   return (
     <ToastContext.Provider value={{ toasts, setToasts, removeToast }}>
