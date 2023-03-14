@@ -9,7 +9,7 @@ export default function ToastProvider() {
   function removeToast(id) {
     setToasts((t) => t.filter((toast) => toast?.props?.id !== id));
   }
-  const clearToast = React.useCallback(() => setToasts([]));
+  const clearToast = React.useCallback(() => setToasts([]), []);
   useEscapeKey(clearToast);
 
   return (
