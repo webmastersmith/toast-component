@@ -1,11 +1,10 @@
 import React from 'react';
-import ToastPlayground from '../ToastPlayground';
 import { useEscapeKey } from '../Hooks';
 import { VARIANT_OPTIONS } from '../ToastPlayground';
 
 export const ToastContext = React.createContext();
 
-export default function ToastProvider() {
+export default function ToastProvider({ children }) {
   const [toasts, setToasts] = React.useState([]);
   function removeToast(id) {
     setToasts(() => toasts.filter((toast) => toast.id !== id));
@@ -20,7 +19,7 @@ export default function ToastProvider() {
 
   return (
     <ToastContext.Provider value={{ toasts, setToasts, removeToast, createToast }}>
-      <ToastPlayground />
+      {children}
     </ToastContext.Provider>
   );
 }
