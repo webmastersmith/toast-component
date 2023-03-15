@@ -1,6 +1,7 @@
 import React from 'react';
 import ToastPlayground from '../ToastPlayground';
 import { useEscapeKey } from '../Hooks';
+import { VARIANT_OPTIONS } from '../ToastPlayground';
 
 export const ToastContext = React.createContext();
 
@@ -9,7 +10,7 @@ export default function ToastProvider() {
   function removeToast(id) {
     setToasts(() => toasts.filter((toast) => toast.id !== id));
   }
-  function createToast(msg = 'default msg', variant = 'notice') {
+  function createToast(msg = 'default msg', variant = VARIANT_OPTIONS[0]) {
     const id = crypto.randomUUID();
     return { id, msg, variant };
   }

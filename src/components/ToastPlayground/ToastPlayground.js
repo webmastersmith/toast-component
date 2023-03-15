@@ -6,10 +6,10 @@ import { ToastContext } from '../ToastProvider';
 
 import styles from './ToastPlayground.module.css';
 
-const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
+export const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
-  const [status, setStatus] = React.useState('notice');
+  const [status, setStatus] = React.useState(VARIANT_OPTIONS[0]);
   const [msg, setMsg] = React.useState('');
   const { toasts, setToasts, createToast } = React.useContext(ToastContext);
 
@@ -50,13 +50,14 @@ function ToastPlayground() {
           <div className={styles.label}>Variant</div>
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             {VARIANT_OPTIONS.map((variant) => {
+              const id = `variant-${variant}`;
               return (
                 <div key={variant}>
-                  <label htmlFor={`variant-${variant}`}>
+                  <label htmlFor={id}>
                     <input
-                      id={`variant-${variant}`}
+                      id={id}
                       type="radio"
-                      name={variant}
+                      name="variant"
                       value={variant}
                       checked={status === variant}
                       onChange={(e) => setStatus(variant)}
