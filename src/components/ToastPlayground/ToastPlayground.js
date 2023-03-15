@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Button from '../Button';
-import Toast from '../Toast';
 import ToastShelf from '../ToastShelf';
 import { ToastContext } from '../ToastProvider';
 
@@ -10,17 +9,15 @@ import styles from './ToastPlayground.module.css';
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
-  const [shape, setShape] = React.useState('notice');
+  const [status, setStatus] = React.useState('notice');
   const [msg, setMsg] = React.useState('');
-  const { toasts, setToasts, removeToast } = React.useContext(ToastContext);
+  const { toasts, setToasts, createToast } = React.useContext(ToastContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    // setShow(true);
-    const id = crypto.randomUUID();
-    setToasts((t) => [...t, <Toast variant={shape} msg={msg} removeToast={() => removeToast(id)} id={id} />]);
+    setToasts((toasts) => [...toasts, createToast(msg, status)]);
     setMsg('');
-    setShape('notice');
+    setStatus('notice');
   }
 
   return (
@@ -61,8 +58,8 @@ function ToastPlayground() {
                       type="radio"
                       name={variant}
                       value={variant}
-                      checked={shape === variant}
-                      onChange={(e) => setShape(variant)}
+                      checked={status === variant}
+                      onChange={(e) => setStatus(variant)}
                     />
                     {variant}
                   </label>
